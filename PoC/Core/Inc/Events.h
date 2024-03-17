@@ -3,7 +3,7 @@
 
 #include "Dem.h"
 
-#define OVER_VOLTAGE_ID 1
-#define UNDER_VOLTAGE_ID 2
+#define OVER_VOLTAGE_ID 0x01
+#define UNDER_VOLTAGE_ID 0x02
 
 #endif  // POC_CORE_INC_EVENTS_H_
