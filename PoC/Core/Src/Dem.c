@@ -36,3 +36,22 @@ Std_ReturnType Dem_SetEventStatus(Dem_EventIdType EventId, Dem_EventStatusType E
     }
     return E_NOK;
 }
+
+Std_ReturnType Dem_GetStatusOfDTC (uint8_t ClientId,uint8_t* DTCStatus)
+{
+    switch (ClientId)
+        {
+        case OVER_VOLTAGE_ID:
+            if (NvM_ReadBlock(overVoltage.blockId, DTCStatus) == E_OK)
+            {
+                return E_OK;
+            }
+
+        case UNDER_VOLTAGE_ID:
+            if (NvM_ReadBlock(underVoltage.blockId, DTCStatus) == E_OK)
+            {
+                return E_OK;
+            }
+        }
+    return E_NOK;
+}

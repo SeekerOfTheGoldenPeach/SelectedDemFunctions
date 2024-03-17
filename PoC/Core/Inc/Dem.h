@@ -15,4 +15,6 @@ typedef struct event
 
 Std_ReturnType Dem_SetEventStatus(Dem_EventIdType EventId, Dem_EventStatusType EventStatus);
 
+Std_ReturnType Dem_GetStatusOfDTC (uint8_t ClientId,uint8_t* DTCStatus);
+
 #endif  // POC_CORE_INC_DEM_H_

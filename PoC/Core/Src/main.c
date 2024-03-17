@@ -100,9 +100,8 @@ int main(void)
 
   HAL_Delay(5);
 
-  NvM_ReadBlock(0x10, &under);
-  NvM_ReadBlock(0x02, &over);
-
+  Dem_GetStatusOfDTC(UNDER_VOLTAGE_ID, &under);
+  Dem_GetStatusOfDTC(OVER_VOLTAGE_ID, &over);
   /* USER CODE END 2 */
 
   /* Infinite loop */
