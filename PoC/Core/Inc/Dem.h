@@ -11,7 +11,6 @@ typedef struct event
     Dem_EventIdType EventId;
     Dem_EventStatusType EventStatus;
     NvM_BlockIdType blockId;
-    char DTC[8];
 };
 
 Std_ReturnType Dem_SetEventStatus(Dem_EventIdType EventId, Dem_EventStatusType EventStatus);

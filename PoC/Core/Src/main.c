@@ -91,13 +91,17 @@ int main(void)
   MX_GPIO_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
+  uint32_t under = 0;
+  uint32_t over = 0;
 
+  Dem_SetEventStatus(UNDER_VOLTAGE_ID, DEM_EVENT_STATUS_FAILED);
   Dem_SetEventStatus(OVER_VOLTAGE_ID, DEM_EVENT_STATUS_FAILED);
+
 
   HAL_Delay(5);
 
-  char result[8];
-  NvM_ReadBlock(0x10, &result);
+  NvM_ReadBlock(0x10, &under);
+  NvM_ReadBlock(0x02, &over);
 
   /* USER CODE END 2 */
 
