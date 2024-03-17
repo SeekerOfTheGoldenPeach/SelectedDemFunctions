@@ -1,5 +1,5 @@
 #include "NvM.h"
-#include "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+#include "../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
 
 extern I2C_HandleTypeDef hi2c1;
 #define EEPROM_I2C &hi2c1
