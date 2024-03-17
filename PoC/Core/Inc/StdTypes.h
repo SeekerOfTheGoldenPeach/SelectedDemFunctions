@@ -1,7 +1,6 @@
 #include <stdint.h>
 
-struct Std_ReturnType
-{
-  uint8_t E_OK = 0;
-  uint8_t E_NOK = 1;
-};
+#define E_OK 0
+#define E_NOK 1
+
+typedef uint8_t Std_ReturnType;
