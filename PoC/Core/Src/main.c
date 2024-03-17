@@ -1,27 +1,27 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2024 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file           : main.c
+ * @brief          : Main program body
+ ******************************************************************************
+ * @attention
+ *
+ * Copyright (c) 2024 STMicroelectronics.
+ * All rights reserved.
+ *
+ * This software is licensed under terms that can be found in the LICENSE file
+ * in the root directory of this software component.
+ * If no LICENSE file comes with this software, it is provided AS-IS.
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "NvM.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -90,13 +90,16 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
 
-  uint8_t test = 0x5A;
-  HAL_I2C_Mem_Write(&hi2c1, 0xA0, 0x10, 1, &test, sizeof(test), HAL_MAX_DELAY);
+  uint8_t data = 0x03;
+  const void* pointerToDataAddress = &data;
+
+  NvM_WriteBlock(0x10, pointerToDataAddress);
 
   HAL_Delay(5);
 
   uint8_t result = 0;
-  HAL_I2C_Mem_Read(&hi2c1, 0xA0, 0x10, 1, &result, sizeof(result), HAL_MAX_DELAY);
+  NvM_ReadBlock(0x10, &result);
+
 
   /* USER CODE END 2 */
 
