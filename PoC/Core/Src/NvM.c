@@ -19,6 +19,7 @@ Std_ReturnType NvM_WriteBlock(NvM_BlockIdType BlockId, const void *NvM_SrcPtr)
 {
     if (HAL_I2C_Mem_Write(&hi2c1, devAddr, BlockId, AddressSize, NvM_SrcPtr, sizeof(NvM_SrcPtr), HAL_MAX_DELAY) != HAL_OK)
     {
+    	HAL_Delay(5);
         return E_NOK;
     }
     return E_OK;
