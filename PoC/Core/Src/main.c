@@ -27,6 +27,7 @@
 #include "check_voltage.h"
 #include <stdio.h>
 #include "DLTuc.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -50,10 +51,12 @@ ADC_HandleTypeDef hadc1;
 I2C_HandleTypeDef hi2c1;
 
 UART_HandleTypeDef huart3;
-DMA_HandleTypeDef hdma_usart3_tx;
 DMA_HandleTypeDef hdma_usart3_rx;
+DMA_HandleTypeDef hdma_usart3_tx;
 
 /* USER CODE BEGIN PV */
+uint32_t vol = 0;
+uint8_t tx_buffer[128];
 
 /* USER CODE END PV */
 
@@ -62,48 +65,15 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
 static void MX_I2C1_Init(void);
-static void MX_ADC1_Init(void);
 static void MX_USART3_UART_Init(void);
+static void MX_ADC1_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
-{
-	  DLTuc_RawDataReceiveDone(Size);
-}
 
-void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
-{
-	  DLTuc_MessageTransmitDone();
-}
-
-void LLSerialTrDataFunctionC(uint8_t *DltLogData, uint8_t Size)
-{
-	HAL_UART_Transmit_DMA(&huart3, DltLogData, Size);
-}
-
-void LLSerialRecDataFunctionC(uint8_t *DltLogData, uint16_t Size)
-{
-	HAL_UARTEx_ReceiveToIdle_DMA(&huart3, DltLogData, Size);
-}
-
-void DltInjectDataRcvd(uint32_t AppId, uint32_t ConId,uint32_t ServId,uint8_t *Data, uint16_t Size)
-{
-	LOG("RecInjectionData: %s, ServId: %d Size: %d", Data,ServId,Size)
-	if(strstr(Data, "Read DTC") != NULL)
-	{
-		uint8_t overvoltage_status = 0u;
-		uint8_t undervoltage_status = 0u;
-
-		Dem_GetStatusOfDTC(OVER_VOLTAGE_ID, &overvoltage_status);
-		Dem_GetStatusOfDTC(UNDER_VOLTAGE_ID, &undervoltage_status);
-		LOGL(DL_INFO, "OVERVOLTAGE STATUS: %x", overvoltage_status);
-		LOGL(DL_INFO, "UNDERVOLTAGE STATUS: %x", undervoltage_status);
-	}
-}
 /* USER CODE END 0 */
 
 /**
@@ -113,8 +83,6 @@ void DltInjectDataRcvd(uint32_t AppId, uint32_t ConId,uint32_t ServId,uint8_t *D
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
-	uint32_t vol = 0;
 
   /* USER CODE END 1 */
 
@@ -138,33 +106,16 @@ int main(void)
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_I2C1_Init();
-  MX_ADC1_Init();
   MX_USART3_UART_Init();
+  MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
 
-	/*Register Low Level Transmit/Receive functions for DLTuc Library*/
-	DLTuc_RegisterTransmitSerialDataFunction(LLSerialTrDataFunctionC);
-	DLTuc_RegisterReceiveSerialDataFunction(LLSerialRecDataFunctionC);
-
-	DLTuc_RegisterGetTimeStampMsCallback(HAL_GetTick); 	/*Register GetSysTime function*/
-	/*The function "GetSysTime" must return the time in ms*/
-
-	DLTuc_RegisterInjectionDataReceivedCb(DltInjectDataRcvd);
-
-	/*Now ucDLTlib is ready to work!*/
-	LOGL(DL_INFO, "DLT TESTS START!!!");
 
   HAL_ADC_Start(&hadc1);
   HAL_ADC_PollForConversion(&hadc1, 20);
-  vol = HAL_ADC_GetValue(&hadc1);
 
-  Check_Voltage(vol);
-  HAL_Delay(5);
   uint8_t overvoltageStatus[4] = {0};
   uint8_t undervoltageStatus[4] = {0};
-  Dem_GetStatusOfDTC(OVER_VOLTAGE_ID, overvoltageStatus);
-  Dem_GetStatusOfDTC(UNDER_VOLTAGE_ID, undervoltageStatus);
-
 
   /* USER CODE END 2 */
 
@@ -172,6 +123,14 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	vol = HAL_ADC_GetValue(&hadc1);
+	Check_Voltage(vol);
+	HAL_Delay(5);
+	Dem_GetStatusOfDTC(OVER_VOLTAGE_ID, overvoltageStatus);
+	Dem_GetStatusOfDTC(UNDER_VOLTAGE_ID, undervoltageStatus);
+
+
+    HAL_Delay(5000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -376,6 +335,7 @@ static void MX_GPIO_Init(void)
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
