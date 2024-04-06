@@ -1,32 +1,30 @@
 #include "check_voltage.h"
-#include "Rte_Dem_Type.h"
-#include "Events.h"
-#include "../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
-#include "logger.h"
-#include "StdTypes.h"
+#define DLT_LOG_CONTEX           "vMon"
+
 uint32_t vol_conv = 0;
 
 void Check_Voltage(uint32_t vol_read)
 {
-  logger("Voltage Monitor: Operation Started\n\r");
+	LOGF(DL_DEBUG, "Operation Started");
+
   vol_conv = (vol_read * 5.0) / 4095.0;
   if (vol_conv <= 2)
   {
-	logger("Voltage Monitor: OverVoltage detected!\n\r");
+	  LOGF(DL_DEBUG, "OverVoltage detected!");
     if (Dem_SetEventStatus(OVER_VOLTAGE_ID, DEM_EVENT_STATUS_FAILED) != E_OK)
     {
-    	logger("Voltage Monitor: Reporting Event failed!\n\r");
+    	LOGFF(DL_FATAL, "Reporting Event failed!");
     }
-    logger("Voltage Monitor: Reporting OverVoltage succeed!\n\r");
+    LOGF(DL_DEBUG, "Reporting OverVoltage succeed!");
   }
   if (vol_conv >= 4)
   {
-	logger("Voltage Monitor: UnderVoltage detected!\n\r");
+	  LOGF(DL_DEBUG, "UnderVoltage detected!");
     if (Dem_SetEventStatus(UNDER_VOLTAGE_ID, DEM_EVENT_STATUS_FAILED) != E_OK)
     {
-    	logger("Voltage Monitor: Reporting Event failed!\n\r");
+    	LOGFF(DL_FATAL, "Reporting Event failed!");
     }
-    logger("Voltage Monitor: Reporting UnderVoltage succeed!\n\r");
+    LOGF(DL_DEBUG, "Reporting UnderVoltage succeed");
   }
-  logger("Voltage Monitor: Operation Finished\n\r");
+  LOGF(DL_DEBUG, "Operation Finished");
 }

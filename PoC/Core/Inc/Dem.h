@@ -4,6 +4,10 @@
 #include "StdTypes.h"
 #include "Rte_Dem_Type.h"
 #include "Rte_NvM_Type.h"
+#include "DLTuc.h"
+#include "NvM.h"
+#include "Events.h"
+
 
 typedef struct event
 {

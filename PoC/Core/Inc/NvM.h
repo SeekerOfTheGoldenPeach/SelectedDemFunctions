@@ -3,6 +3,8 @@
 
 #include "stm32f4xx_hal.h"
 
+#include "DLTuc.h"
+
 #ifndef INC_EEPROM_H_
 #define INC_EEPROM_H_
 

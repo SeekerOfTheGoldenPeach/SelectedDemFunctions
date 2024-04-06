@@ -37,7 +37,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define DLT_LOG_CONTEX           "MAIN"
+#define DLT_LOG_APPID            "NUM1"
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -49,6 +50,8 @@
 ADC_HandleTypeDef hadc1;
 
 I2C_HandleTypeDef hi2c1;
+
+RTC_HandleTypeDef hrtc;
 
 UART_HandleTypeDef huart3;
 DMA_HandleTypeDef hdma_usart3_rx;
@@ -67,12 +70,38 @@ static void MX_DMA_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_USART3_UART_Init(void);
 static void MX_ADC1_Init(void);
+static void MX_RTC_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
+{
+	DLTuc_RawDataReceiveDone(Size);
+}
+
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
+{
+	DLTuc_MessageTransmitDone();
+}
+
+void LLSerialTrDataFunctionC(uint8_t *DltLogData, uint8_t Size)
+{
+	HAL_UART_Transmit_DMA(&huart3, DltLogData, Size);
+}
+
+void LLSerialRecDataFunctionC(uint8_t *DltLogData, uint16_t Size)
+{
+	HAL_UARTEx_ReceiveToIdle_DMA(&huart3, DltLogData, Size);
+}
+
+void DltInjectDataRcvd(uint32_t AppId, uint32_t ConId,uint32_t ServId,uint8_t *Data, uint16_t Size)
+{
+	LOG("RecInjectionData: %s, ServId: %d Size: %d", Data,ServId,Size)
+
+}
 
 /* USER CODE END 0 */
 
@@ -108,8 +137,19 @@ int main(void)
   MX_I2C1_Init();
   MX_USART3_UART_Init();
   MX_ADC1_Init();
+  MX_RTC_Init();
   /* USER CODE BEGIN 2 */
+  /*Register Low Level Transmit/Receive functions for DLTuc Library*/
+  DLTuc_RegisterTransmitSerialDataFunction(LLSerialTrDataFunctionC);
+  DLTuc_RegisterReceiveSerialDataFunction(LLSerialRecDataFunctionC);
 
+  DLTuc_RegisterGetTimeStampMsCallback(HAL_GetTick); 	/*Register GetSysTime function*/
+  /*The function "GetSysTime" must return the time in ms*/
+
+  DLTuc_RegisterInjectionDataReceivedCb(DltInjectDataRcvd);
+
+  /*Now ucDLTlib is ready to work!*/
+  LOGL(DL_INFO, "DLT TESTS START!!!");
 
   HAL_ADC_Start(&hadc1);
   HAL_ADC_PollForConversion(&hadc1, 20);
@@ -123,11 +163,15 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	LOGL(DL_INFO, "LOOP LOG from PoC!!!");
+	HAL_Delay(5);
 	vol = HAL_ADC_GetValue(&hadc1);
 	Check_Voltage(vol);
-	HAL_Delay(5);
+	HAL_Delay(50);
 	Dem_GetStatusOfDTC(OVER_VOLTAGE_ID, overvoltageStatus);
+	HAL_Delay(50);
 	Dem_GetStatusOfDTC(UNDER_VOLTAGE_ID, undervoltageStatus);
+	HAL_Delay(50);
 
 
     HAL_Delay(5000);
@@ -155,9 +199,10 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_LSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+  RCC_OscInitStruct.LSIState = RCC_LSI_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
   RCC_OscInitStruct.PLL.PLLM = 8;
@@ -267,6 +312,41 @@ static void MX_I2C1_Init(void)
   /* USER CODE BEGIN I2C1_Init 2 */
 
   /* USER CODE END I2C1_Init 2 */
+
+}
+
+/**
+  * @brief RTC Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_RTC_Init(void)
+{
+
+  /* USER CODE BEGIN RTC_Init 0 */
+
+  /* USER CODE END RTC_Init 0 */
+
+  /* USER CODE BEGIN RTC_Init 1 */
+
+  /* USER CODE END RTC_Init 1 */
+
+  /** Initialize RTC Only
+  */
+  hrtc.Instance = RTC;
+  hrtc.Init.HourFormat = RTC_HOURFORMAT_24;
+  hrtc.Init.AsynchPrediv = 127;
+  hrtc.Init.SynchPrediv = 255;
+  hrtc.Init.OutPut = RTC_OUTPUT_DISABLE;
+  hrtc.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
+  hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
+  if (HAL_RTC_Init(&hrtc) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN RTC_Init 2 */
+
+  /* USER CODE END RTC_Init 2 */
 
 }
 
