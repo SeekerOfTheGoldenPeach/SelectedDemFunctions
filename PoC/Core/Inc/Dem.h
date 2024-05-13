@@ -8,17 +8,18 @@
 #include "NvM.h"
 #include "Events.h"
 
+#define OVER_VOLTAGE_ID (0x00u)
+#define UNDER_VOLTAGE_ID (0x01u)
 
-typedef struct event
-{
-    char EventName[255];
-    Dem_EventIdType EventId;
-    Dem_EventStatusType EventStatus;
-    NvM_BlockIdType blockId;
-};
+#define DLT_LOG_CONTEX "DEM"
+
+extern struct event overVoltage;
+extern struct event underVoltage;
 
 Std_ReturnType Dem_SetEventStatus(Dem_EventIdType EventId, Dem_EventStatusType EventStatus);
 
-Std_ReturnType Dem_GetStatusOfDTC (uint8_t ClientId,uint8_t* DTCStatus);
+Std_ReturnType Dem_GetStatusOfDTC(uint8_t ClientId, uint8_t *DTCStatus);
 
-#endif  // POC_CORE_INC_DEM_H_
+Std_ReturnType Dem_ClearDTC(uint8_t ClientId);
+
+#endif // POC_CORE_INC_DEM_H_
