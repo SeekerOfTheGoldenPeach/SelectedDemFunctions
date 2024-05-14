@@ -1,5 +1,5 @@
 #include "VoltageMonitor.h"
-
+#define DLT_LOG_CONTEX "vMon"
 void CheckVoltage()
 {
   const float SupplyVoltage = 3.0;
@@ -41,3 +41,4 @@ void CheckVoltage()
   }
   LOGF(DL_DEBUG, "Operation Finished");
 }
+#undef DLT_LOG_CONTEX

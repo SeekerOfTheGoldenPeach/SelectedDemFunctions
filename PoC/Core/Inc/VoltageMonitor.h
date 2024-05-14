@@ -14,8 +14,6 @@
 
 extern ADC_HandleTypeDef hadc1;
 
-#define DLT_LOG_CONTEX "vMon"
-
 void CheckVoltage();
 
 #endif // POC_CORE_INC_VOLTAGEMONITOR_H_

@@ -13,6 +13,6 @@ typedef struct event
     Dem_EventStatusType EventStatus;
     NvM_BlockIdType blockId;
     uint8_t clientId;
-};
+}event;
 
 #endif // POC_CORE_INC_EVENTS_H_

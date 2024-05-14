@@ -25,6 +25,7 @@
 #include <stdio.h>
 
 #include "DLTuc.h"
+#include "DLTucConfig.h"
 #include "VoltageMonitor.h"
 #include "DtcRequestHandler.h"
 
@@ -38,8 +39,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define DLT_LOG_CONTEX "MAIN"
-#define DLT_LOG_APPID "0000"
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/

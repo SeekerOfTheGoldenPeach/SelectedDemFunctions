@@ -1,5 +1,6 @@
 #include "Dem.h"
-
+#undef DLT_LOG_CONTEX
+#define DLT_LOG_CONTEX "DEM"
 Std_ReturnType Dem_SetEventStatus(Dem_EventIdType EventId, Dem_EventStatusType EventStatus)
 {
     LOGF(DL_DEBUG, "Operation started!");
@@ -91,3 +92,5 @@ Std_ReturnType Dem_ClearDTC(uint8_t ClientId)
     LOGFF(DL_FATAL, "Operation failed!");
     return E_NOK;
 }
+
+#undef DLT_LOG_CONTEX

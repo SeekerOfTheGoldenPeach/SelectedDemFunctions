@@ -1,5 +1,6 @@
 #include "NvM.h"
-
+#undef DLT_LOG_CONTEX
+#define DLT_LOG_CONTEX "NVM"
 Std_ReturnType NvM_ReadBlock(NvM_BlockIdType BlockId, void *NvM_DstPtr)
 {
     LOGF(DL_DEBUG, "Operation started! Read Block ID: %x", BlockId);
@@ -25,3 +26,5 @@ Std_ReturnType NvM_WriteBlock(NvM_BlockIdType BlockId, const void *NvM_SrcPtr)
     LOGF(DL_DEBUG, "Operation succeeded!");
     return E_OK;
 }
+#undef DLT_LOG_CONTEX
+

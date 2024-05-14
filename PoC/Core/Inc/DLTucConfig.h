@@ -31,7 +31,7 @@
  *
  */
 #ifndef DLT_LOG_CONTEX
-#define DLT_LOG_CONTEX "DFLT"
+#define DLT_LOG_CONTEX "MAIN"
 #endif
 
 /**!

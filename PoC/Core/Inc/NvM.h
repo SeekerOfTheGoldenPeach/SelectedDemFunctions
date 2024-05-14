@@ -9,8 +9,6 @@
 
 extern I2C_HandleTypeDef hi2c1;
 
-#define DLT_LOG_CONTEX "NVM"
-
 #define EEPROM_I2C &hi2c1
 #define devAddr 0xA0
 #define AddressSize 1
