@@ -1,0 +1,3 @@
+../Core/Src/Dem.c:3:16:Dem_SetEventStatus	320	static
+../Core/Src/Dem.c:40:16:Dem_GetStatusOfDTC	312	static
+../Core/Src/Dem.c:70:16:Dem_ClearDTC	304	static
