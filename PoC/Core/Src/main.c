@@ -60,10 +60,10 @@ DMA_HandleTypeDef hdma_usart3_rx;
 DMA_HandleTypeDef hdma_usart3_tx;
 
 /* USER CODE BEGIN PV */
-uint32_t msNow = 0;
-uint32_t msLast = 0;
-bool clearDtcFlag = false;
-bool readDtcFlag = false;
+static uint32_t msNow = 0;
+static uint32_t msLast = 0;
+static bool clearDtcFlag = false;
+static bool readDtcFlag = false;
 
 /* USER CODE END PV */
 
