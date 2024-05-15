@@ -10,14 +10,6 @@ void CheckVoltage()
   char strVoltage[50];
 
   LOGF(DL_DEBUG, "Operation Started!");
-//  if (HAL_ADC_PollForConversion(&hadc1, 20) == HAL_OK)
-//  {
-//    adcResult = HAL_ADC_GetValue(&hadc1);
-//    voltage = (SupplyVoltage * adcResult) / ADCResolution;
-//    HAL_ADC_Start(&hadc1);
-//    voltage = roundf(10 * voltage) / 10;
-//    gcvt(voltage, 6, strVoltage);
-//  }
 
   HAL_ADC_Start_DMA(&hadc1, &adcResult, 1);
   voltage = (SupplyVoltage * adcResult) / ADCResolution;
