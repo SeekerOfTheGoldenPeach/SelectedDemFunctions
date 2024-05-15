@@ -15,4 +15,7 @@ typedef struct event
     uint8_t clientId;
 }event;
 
+extern struct event overVoltage;
+extern struct event underVoltage;
+
 #endif // POC_CORE_INC_EVENTS_H_
