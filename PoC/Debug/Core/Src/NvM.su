@@ -1,2 +1,0 @@
-../Core/Src/NvM.c:3:16:NvM_ReadBlock	32	static
-../Core/Src/NvM.c:15:16:NvM_WriteBlock	32	static
