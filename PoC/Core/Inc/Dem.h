@@ -63,41 +63,4 @@ Std_ReturnType Dem_GetStatusOfDTC(uint8_t ClientId, uint8_t *DTCStatus);
  *************************************************************************************************/
 Std_ReturnType Dem_ClearDTC(uint8_t ClientId);
 
-
-/*!
- ************************************************************************************************
- * \brief prepareEventDataForNvm
- * \details Helper functions that prepares data and request writing them by NvM
- *
- * \param[in] event - event entity
- * \param[in] EventStatus - Monitor test result
- * \retval E_OK: Data wrote successfully by NvM.
- *         E_NOT_OK: An error occurred during writing the data.
- *************************************************************************************************/
-Std_ReturnType prepareEventDataForNvm(event event, Dem_EventStatusType EventStatus);
-
-/*!
- ************************************************************************************************
- * \brief readEventDataFromNvm
- * \details Helper functions that request reading data from NvM
- *
- * \param[in] event - event entity
- * \param[out] DTCStatus - This parameter receives the status information of the requested DTC.
- * \retval E_OK: Data read successfully from NvM.
- *         E_NOT_OK: An error occurred during reading the data.
- *************************************************************************************************/
-Std_ReturnType readEventDataFromNvm(event event, uint8_t *DTCStatus);
-
-
-/*!
- ************************************************************************************************
- * \brief clearEventBlock
- * \details Helper functions that request clearing memory block related with event by NvM.
- *
- * \param[in] event - event entity
- * \retval E_OK: Event block cleared by NvM.
- *         E_NOT_OK: An error occurred clearing block.
- *************************************************************************************************/
-Std_ReturnType clearEventBlock(event event);
-
 #endif // POC_CORE_INC_DEM_H_
