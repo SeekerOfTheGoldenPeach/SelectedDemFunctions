@@ -16,7 +16,7 @@ Std_ReturnType prepareEventDataForNvm(event event, Dem_EventStatusType EventStat
     data[3] = 0xff;
     LOGF(DL_DEBUG, "Operation succeeded! Data passed to write: %x %x %x %x", data[0], data[1], data[2], data[3]);
     LOGF(DL_DEBUG, "Start writing to NvM");
-    if (NvM_WriteBlock(event.blockId, pointerToData) == E_OK)
+    if (E_OK == NvM_WriteBlock(event.blockId, pointerToData))
     {
         ret_val = E_OK;
     }
@@ -32,7 +32,7 @@ Std_ReturnType readEventDataFromNvm(event event, uint8_t *DTCStatus)
 {
     Std_ReturnType ret_val = E_NOK;
     LOGF(DL_DEBUG, "Requesting status: %s", event.EventName);
-    if (NvM_ReadBlock(event.blockId, DTCStatus) == E_OK)
+    if (E_OK == NvM_ReadBlock(event.blockId, DTCStatus))
     {
         LOGL(DL_INFO, "DEM: %s status: %x %x %x %x", event.EventName, DTCStatus[0], DTCStatus[1], DTCStatus[2], DTCStatus[3]);
         LOGF(DL_DEBUG, "Operation finished!");
@@ -53,7 +53,7 @@ Std_ReturnType clearEventBlock(event event)
     Std_ReturnType ret_val = E_NOK;
 
     LOGF(DL_DEBUG, "Clear: %s  | BlockId: ", event.EventName, event.blockId);
-    if (NvM_WriteBlock(event.blockId, emptyData) == E_OK)
+    if (E_OK == NvM_WriteBlock(event.blockId, emptyData))
     {
         LOGF(DL_DEBUG, "Operation finished!");
         ret_val = E_OK;
