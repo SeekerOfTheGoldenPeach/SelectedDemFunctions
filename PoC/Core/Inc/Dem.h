@@ -63,7 +63,6 @@ Std_ReturnType Dem_GetStatusOfDTC(uint8_t ClientId, uint8_t *DTCStatus);
  *************************************************************************************************/
 Std_ReturnType Dem_ClearDTC(uint8_t ClientId);
 
-
 /*!
  ************************************************************************************************
  * \brief prepareEventDataForNvm
@@ -87,7 +86,6 @@ static Std_ReturnType prepareEventDataForNvm(struct event event, Dem_EventStatus
  *         E_NOT_OK: An error occurred during reading the data.
  *************************************************************************************************/
 static Std_ReturnType readEventDataFromNvm(struct event event, uint8_t *DTCStatus);
-
 
 /*!
  ************************************************************************************************

@@ -13,7 +13,7 @@
 #include <stdint.h>
 
 /**
- * @brief Identification of an event by assigned EventId. 
+ * @brief Identification of an event by assigned EventId.
  * The EventId is assigned by the Dem. Example: 1 refers to monitor x, 2 refers to monitor y, etc.
  */
 typedef uint16_t Dem_EventIdType;

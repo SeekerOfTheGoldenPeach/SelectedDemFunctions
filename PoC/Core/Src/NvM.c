@@ -35,6 +35,7 @@ Std_ReturnType NvM_WriteBlock(NvM_BlockIdType BlockId, const void *NvM_SrcPtr)
         LOGFF(DL_FATAL, "Operation failed!");
         ret_val = E_NOK;
     }
+    HAL_Delay(10);
     return ret_val;
 }
 #undef DLT_LOG_CONTEX

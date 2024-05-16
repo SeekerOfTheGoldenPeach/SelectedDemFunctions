@@ -21,7 +21,7 @@ typedef struct event
     Dem_EventStatusType EventStatus;
     NvM_BlockIdType blockId;
     uint8_t clientId;
-}event;
+} event;
 
 /*
  * Event instances

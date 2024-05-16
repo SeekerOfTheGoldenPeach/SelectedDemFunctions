@@ -4,8 +4,8 @@
 
 static Std_ReturnType prepareEventDataForNvm(event event, Dem_EventStatusType EventStatus)
 {
-    Std_ReturnType ret_val = E_NOK;
     uint8_t data[4] = {0};
+    Std_ReturnType ret_val = E_NOK;
     const void *pointerToData = &data;
 
     LOGF(DL_DEBUG, "Got %s notification!", event.EventName);
@@ -16,7 +16,7 @@ static Std_ReturnType prepareEventDataForNvm(event event, Dem_EventStatusType Ev
     data[3] = 0xff;
     LOGF(DL_DEBUG, "Operation succeeded! Data passed to write: %x %x %x %x", data[0], data[1], data[2], data[3]);
     LOGF(DL_DEBUG, "Start writing to NvM");
-    if (NvM_WriteBlock(event.blockId, pointerToData == E_OK))
+    if (NvM_WriteBlock(event.blockId, pointerToData) == E_OK)
     {
         ret_val = E_OK;
     }
@@ -51,9 +51,10 @@ static Std_ReturnType clearEventBlock(event event)
 {
     uint8_t emptyData[4] = {0};
     Std_ReturnType ret_val = E_NOK;
+    const void *pointerToData = &emptyData;
 
     LOGF(DL_DEBUG, "Clear: %s  | BlockId: %x", event.EventName, event.blockId);
-    if (NvM_WriteBlock(event.blockId, emptyData) == E_OK)
+    if (NvM_WriteBlock(event.blockId, pointerToData) == E_OK)
     {
         LOGF(DL_DEBUG, "Operation finished!");
         ret_val = E_OK;

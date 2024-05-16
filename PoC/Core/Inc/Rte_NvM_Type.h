@@ -32,13 +32,13 @@
 
 /**
  * @brief dentification of a NVRAM block via a unique block identifier.
- * Reserved NVRAM block IDs: 0 -> to derive multi block request results via NvM_GetErrorStatus 1-> redundant 
+ * Reserved NVRAM block IDs: 0 -> to derive multi block request results via NvM_GetErrorStatus 1-> redundant
  * NVRAM block which holds the configuration ID
  */
 typedef uint16_t NvM_BlockIdType;
 
 /**
- * @brief This is an asynchronous request result returned by the API service NvM_GetErrorStatus. 
+ * @brief This is an asynchronous request result returned by the API service NvM_GetErrorStatus.
  * The availability of an asynchronous request result can be additionally signaled via a callback function.
  */
 typedef uint8_t NvM_RequestResultType;

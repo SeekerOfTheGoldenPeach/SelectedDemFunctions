@@ -20,7 +20,7 @@
 
 /**
  * @brief This type can be used as standard API return type which is shared between the RTE and the BSW Modules.
- * The Std_ReturnType shall normally be used with value E_OK or E_NOT_OK. If those return values are not sufficient 
+ * The Std_ReturnType shall normally be used with value E_OK or E_NOT_OK. If those return values are not sufficient
  * user specific values can be defined by using the 6 least specific bits.
  */
 typedef uint8_t Std_ReturnType;
