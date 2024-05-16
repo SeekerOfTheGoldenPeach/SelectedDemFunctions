@@ -23,19 +23,26 @@ Std_ReturnType NvM_ReadBlock(NvM_BlockIdType BlockId, void *NvM_DstPtr)
 Std_ReturnType NvM_WriteBlock(NvM_BlockIdType BlockId, const void *NvM_SrcPtr)
 {
     Std_ReturnType ret_val = E_NOK;
-
     LOGF(DL_DEBUG, "Operation started! Writing Block ID %x", BlockId);
-    if (HAL_I2C_Mem_Write(&hi2c1, devAddr, BlockId, AddressSize, NvM_SrcPtr, BLOCK_SIZE, HAL_MAX_DELAY) == HAL_OK)
-    {
-        LOGF(DL_DEBUG, "Operation succeeded!");
-        ret_val = E_OK;
-    }
-    else
+    if (HAL_I2C_Mem_Write(&hi2c1, devAddr, BlockId, AddressSize, NvM_SrcPtr, BLOCK_SIZE, HAL_MAX_DELAY) != HAL_OK)
     {
         LOGFF(DL_FATAL, "Operation failed!");
         ret_val = E_NOK;
     }
-    HAL_Delay(10);
+    else
+    {
+        if (HAL_I2C_IsDeviceReady(&hi2c1, devAddr, TRIALS, PING_TIME_OUT) != HAL_OK)
+        {
+            LOGFF(DL_FATAL, "Operation failed! Timeout during writing EEPROM exceeded!");
+            ret_val = E_NOK;
+        }
+        else
+        {
+            LOGF(DL_DEBUG, "Operation succeeded!");
+            ret_val = E_OK;
+        }
+    }
+
     return ret_val;
 }
 #undef DLT_LOG_CONTEX

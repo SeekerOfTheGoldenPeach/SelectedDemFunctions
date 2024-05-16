@@ -23,6 +23,7 @@
 #include "stm32f4xx_hal.h"
 #include "DLTuc.h"
 #include "stm32f4xx_hal_def.h"
+#include <stdbool.h>
 
 /*
  * HAL I2C MEM configuration
@@ -33,6 +34,8 @@ extern I2C_HandleTypeDef hi2c1;
 #define devAddr 0xA0
 #define AddressSize 1
 #define BLOCK_SIZE 4
+#define TRIALS 100
+#define PING_TIME_OUT 300
 
 /*
  * Event Block IDs
