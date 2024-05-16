@@ -1,6 +1,6 @@
 /**
  * @file Rte_Dem_Type.h
- * @author O.Komornicki
+ * @author O.Komornicki K.Komornicka
  * @date 15 May 2024
  * @brief This header provides data type definition for external data elements
  *
@@ -24,7 +24,7 @@ typedef uint16_t Dem_EventIdType;
 typedef uint8_t Dem_EventStatusType;
 
 /*
- * Events IDs
+ * DEM Event Status Types
  */
 #define DEM_EVENT_STATUS_PASSED (0x00u)
 #define DEM_EVENT_STATUS_FAILED (0x01u)

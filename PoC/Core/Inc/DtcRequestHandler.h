@@ -1,13 +1,8 @@
 /**
  * @file DtcRequestHandler.h
- * @author O.Komornicki
+ * @author O.Komornicki K.Komornicka
  * @date 15 May 2024
- * @brief This header provides API and the configuration of the AUTOSAR basic software module Diagnostic Event Manager 
- *
- * Dtc Request Handler component is responsible for handling, reading and clearing
- * errors
- *
- * @see https://www.autosar.org/fileadmin/standards/R22-11/CP/AUTOSAR_SWS_DiagnosticEventManager.pdf
+ * @brief Dtc Request Handler component is responsible for reading and clearing DTCs
  */
 
 #ifndef POC_CORE_INC_DTCREQUESTHANDLER_H_

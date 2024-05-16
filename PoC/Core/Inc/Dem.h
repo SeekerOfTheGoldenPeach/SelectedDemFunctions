@@ -1,6 +1,6 @@
 /**
  * @file Dem.h
- * @author O.Komornicki
+ * @author O.Komornicki K.Komornicka
  * @date 15 May 2024
  * @brief This header provides API and the configuration of the AUTOSAR basic software module Diagnostic Event Manager (Dem)
  *

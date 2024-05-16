@@ -1,6 +1,6 @@
 /**
  * @file StdTypes.H
- * @author O.Komornicki
+ * @author O.Komornicki K.Komornicka
  * @date 15 May 2024
  * @brief This header provides specifies the AUTOSAR standard types
  *
@@ -13,7 +13,7 @@
 #include <stdint.h>
 
 /*
- * Events IDs
+ * Standard Return Types
  */
 #define E_OK (0u)
 #define E_NOK (1u)

@@ -1,13 +1,13 @@
 /**
- * @file Dem.h
- * @author O.Komornicki
+ * @file NvM.h
+ * @author O.Komornicki K.Komornicka
  * @date 15 May 2024
  * @brief This header providesAPI and the configuration of the AUTOSAR Basic Software module NVRAM Manager (NvM)
  * 
  * 
  *The NvM module shall provide services to ensure the data storage and maintenance of
- *NV (non volatile) data according to their individual requirements in an automotive en-
- *vironment. The NvM module shall be able to administrate the NV data of an EEPROM
+ *NV (non volatile) data according to their individual requirements in an automotive environment. 
+ *The NvM module shall be able to administrate the NV data of an EEPROM
  *and/or a FLASH EEPROM emulation device.
  *The NvM module shall provide the required synchronous/asynchronous services for
  *the management and the maintenance of NV data (init/read/write/control).
@@ -29,9 +29,10 @@ extern I2C_HandleTypeDef hi2c1;
 #define EEPROM_I2C &hi2c1
 #define devAddr 0xA0
 #define AddressSize 1
+#define BLOCK_SIZE 4
 
 /*
- * Events IDs
+ * Event Block IDs
  */
 #define OVER_VOLTAGE_BOCK_ID (0x30u)
 #define UNDER_VOLTAGE_BOCK_ID (0x34u)

@@ -2,7 +2,7 @@
 #undef DLT_LOG_CONTEX
 #define DLT_LOG_CONTEX "DtcH"
 
-uint8_t status[4] = {0};
+uint8_t dtcStatus[4] = {0};
 
 void ClearAllDtc()
 {
@@ -23,8 +23,8 @@ void ReadAllDtc()
 	LOGF(DL_DEBUG, "Operation started!");
 
 
-	Dem_GetStatusOfDTC(overVoltage.clientId, status);
-	Dem_GetStatusOfDTC(underVoltage.clientId, status);
+	Dem_GetStatusOfDTC(overVoltage.clientId, dtcStatus);
+	Dem_GetStatusOfDTC(underVoltage.clientId, dtcStatus);
 
 	LOGF(DL_DEBUG, "Operation finished!");
 

@@ -1,6 +1,6 @@
 /**
  * @file Rte_Dem_Type.h
- * @author O.Komornicki
+ * @author O.Komornicki K.Komornicka
  * @date 15 May 2024
  * @brief This header provides data type definition for external data elements
  *
@@ -12,7 +12,7 @@
 
 #include <stdint.h>
 /*
- * Events IDs
+ * NvM Request Result Types
  */
 #define NVM_REQ_OK (0x00u)
 #define NVM_REQ_NOT_OK (0x01u)
@@ -23,7 +23,7 @@
 #define NVM_REQ_CANCELED (0x06u)
 #define NVM_REQ_RESTORED_DEFAULTS (0x08u)
 /*
- * Events IDs
+ * NvM Init Block Request Types
  */
 #define NVM_INIT_READ_BLOCK (0x00u)
 #define NVM_INIT_RESTORE_BLOCK_DEFAULTS (0x01u)
