@@ -7,7 +7,7 @@ Std_ReturnType NvM_ReadBlock(NvM_BlockIdType BlockId, void *NvM_DstPtr)
     Std_ReturnType ret_val = E_NOK;
 
     LOGF(DL_DEBUG, "Operation started! Read Block ID: %x", BlockId);
-    if (HAL_OK == HAL_I2C_Mem_Read(&hi2c1, devAddr, BlockId, AddressSize, NvM_DstPtr, BLOCK_SIZE, HAL_MAX_DELAY))
+    if (HAL_I2C_Mem_Read(&hi2c1, devAddr, BlockId, AddressSize, NvM_DstPtr, BLOCK_SIZE, HAL_MAX_DELAY) == HAL_OK)
     {
         LOGF(DL_DEBUG, "Operation succeeded!");
         ret_val = E_OK;
@@ -25,7 +25,7 @@ Std_ReturnType NvM_WriteBlock(NvM_BlockIdType BlockId, const void *NvM_SrcPtr)
     Std_ReturnType ret_val = E_NOK;
 
     LOGF(DL_DEBUG, "Operation started! Writing Block ID %x", BlockId);
-    if (HAL_OK == HAL_I2C_Mem_Write(&hi2c1, devAddr, BlockId, AddressSize, NvM_SrcPtr, BLOCK_SIZE, HAL_MAX_DELAY))
+    if (HAL_I2C_Mem_Write(&hi2c1, devAddr, BlockId, AddressSize, NvM_SrcPtr, BLOCK_SIZE, HAL_MAX_DELAY) == HAL_OK)
     {
         LOGF(DL_DEBUG, "Operation succeeded!");
         ret_val = E_OK;
