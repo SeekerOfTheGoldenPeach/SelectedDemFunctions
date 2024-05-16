@@ -1,6 +1,9 @@
 #include "DtcRequestHandler.h"
 #undef DLT_LOG_CONTEX
 #define DLT_LOG_CONTEX "DtcH"
+
+uint8_t status[4] = {0};
+
 void ClearAllDtc()
 {
 
@@ -17,13 +20,11 @@ void ClearAllDtc()
 
 void ReadAllDtc()
 {
-	uint8_t dtcStatus[4] = {0};
-
 	LOGF(DL_DEBUG, "Operation started!");
 
 
-	Dem_GetStatusOfDTC(overVoltage.clientId, dtcStatus);
-	Dem_GetStatusOfDTC(underVoltage.clientId, dtcStatus);
+	Dem_GetStatusOfDTC(overVoltage.clientId, status);
+	Dem_GetStatusOfDTC(underVoltage.clientId, status);
 
 	LOGF(DL_DEBUG, "Operation finished!");
 

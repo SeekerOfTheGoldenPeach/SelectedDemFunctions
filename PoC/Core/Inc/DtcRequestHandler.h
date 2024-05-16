@@ -17,7 +17,6 @@
 #include "Dem.h"
 
 
-
 /*!
  ************************************************************************************************
  * \brief ClearAllDtc
@@ -31,7 +30,7 @@ void ClearAllDtc();
  ************************************************************************************************
  * \brief ReadAllDtc
  * \details 
- *  Call this function when the DTC must be readed 
+ *  Call this function when the DTC must be read
  ************************************************************************************************
  * */
 void ReadAllDtc();

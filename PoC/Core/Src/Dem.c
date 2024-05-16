@@ -52,7 +52,7 @@ Std_ReturnType clearEventBlock(event event)
     uint8_t emptyData[4] = {0};
     Std_ReturnType ret_val = E_NOK;
 
-    LOGF(DL_DEBUG, "Clear: %s  | BlockId: ", event.EventName, event.blockId);
+    LOGF(DL_DEBUG, "Clear: %s  | BlockId: %x", event.EventName, event.blockId);
     if (E_OK == NvM_WriteBlock(event.blockId, emptyData))
     {
         LOGF(DL_DEBUG, "Operation finished!");
@@ -79,12 +79,12 @@ Std_ReturnType Dem_SetEventStatus(Dem_EventIdType EventId, Dem_EventStatusType E
         {
         case OVER_VOLTAGE_ID:
             event = overVoltage;
-            ret_val = sendDataToNvM(event, EventStatus);
+            ret_val = prepareEventDataForNvm(event, EventStatus);
             break;
 
         case UNDER_VOLTAGE_ID:
             event = underVoltage;
-            ret_val = sendDataToNvM(event, EventStatus);
+            ret_val = prepareEventDataForNvm(event, EventStatus);
             break;
 
         default:

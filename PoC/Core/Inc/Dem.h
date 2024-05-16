@@ -74,7 +74,7 @@ Std_ReturnType Dem_ClearDTC(uint8_t ClientId);
  * \retval E_OK: Data wrote successfully by NvM.
  *         E_NOT_OK: An error occurred during writing the data.
  *************************************************************************************************/
-Std_ReturnType prepareEventDataForNvm(event event, Dem_EventStatusType EventStatus);
+Std_ReturnType prepareEventDataForNvm(struct event event, Dem_EventStatusType EventStatus);
 
 /*!
  ************************************************************************************************
@@ -86,7 +86,7 @@ Std_ReturnType prepareEventDataForNvm(event event, Dem_EventStatusType EventStat
  * \retval E_OK: Data read successfully from NvM.
  *         E_NOT_OK: An error occurred during reading the data.
  *************************************************************************************************/
-Std_ReturnType readEventDataFromNvm(event event, uint8_t *DTCStatus);
+Std_ReturnType readEventDataFromNvm(struct event event, uint8_t *DTCStatus);
 
 
 /*!
@@ -98,6 +98,6 @@ Std_ReturnType readEventDataFromNvm(event event, uint8_t *DTCStatus);
  * \retval E_OK: Event block cleared by NvM.
  *         E_NOT_OK: An error occurred clearing block.
  *************************************************************************************************/
-Std_ReturnType clearEventBlock(event event);
+Std_ReturnType clearEventBlock(struct event event);
 
 #endif // POC_CORE_INC_DEM_H_
