@@ -24,6 +24,9 @@
 #include "DLTuc.h"
 #include "stm32f4xx_hal_def.h"
 
+/*
+* HAL I2C MEM configuration
+*/
 extern I2C_HandleTypeDef hi2c1;
 
 #define EEPROM_I2C &hi2c1
@@ -48,8 +51,8 @@ extern I2C_HandleTypeDef hi2c1;
  * A NVRAM block descriptor contains all needed information about a single NVRAM block.
  * \param[out] RequestResultPtr - Pointer to where to store the request result. See NvM_Request
  * ResultType.
- * \retval E_OK: set of event status was successful
- *         E_NOT_OK: Event status setting or processing failed or could not be accepted.
+ * \retval E_OK: The block dependent error/status information was read successfully.
+ *         E_NOT_OK: An error occured.
  *************************************************************************************************/
 Std_ReturnType NvM_GetErrorStatus(NvM_BlockIdType BlockId, NvM_RequestResultType *RequestResultPtr);
 
@@ -62,8 +65,8 @@ Std_ReturnType NvM_GetErrorStatus(NvM_BlockIdType BlockId, NvM_RequestResultType
  * \param[in] BlockId - The block identifier uniquely identifies one NVRAM block descriptor. 
  * A NVRAM block descriptor contains all needed information about a single NVRAM block.
  * \param[out] NvM_DstPtr - Pointer to the RAM data block.
- * \retval E_OK: set of event status was successful
- *         E_NOT_OK: Event status setting or processing failed or could not be accepted.
+ * \retval E_OK: request has been accepted
+ *         E_NOT_OK: request has not been accepted
  *************************************************************************************************/
 Std_ReturnType NvM_ReadBlock(NvM_BlockIdType BlockId, void *NvM_DstPtr);
 
@@ -75,8 +78,8 @@ Std_ReturnType NvM_ReadBlock(NvM_BlockIdType BlockId, void *NvM_DstPtr);
  * \param[in] BlockId - The block identifier uniquely identifies one NVRAM block descriptor. 
  * A NVRAM block descriptor contains all needed information about a single NVRAM block.
  * \param[in] NvM_SrcPtr - Pointer to the RAM data block.
- * \retval E_OK: set of event status was successful
- *         E_NOT_OK: Event status setting or processing failed or could not be accepted.
+ * \retval E_OK: request has been accepted
+ *         E_NOT_OK: request has not been accepted
  *************************************************************************************************/
 Std_ReturnType NvM_WriteBlock(NvM_BlockIdType BlockId, const void *NvM_SrcPtr);
 

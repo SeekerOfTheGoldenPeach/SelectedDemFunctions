@@ -2,7 +2,7 @@
 #undef DLT_LOG_CONTEX
 #define DLT_LOG_CONTEX "DEM"
 
-Std_ReturnType prepareEventDataForNvm(event event, Dem_EventStatusType EventStatus)
+static Std_ReturnType prepareEventDataForNvm(event event, Dem_EventStatusType EventStatus)
 {
     Std_ReturnType ret_val = E_NOK;
     uint8_t data[4] = {0};
@@ -28,7 +28,7 @@ Std_ReturnType prepareEventDataForNvm(event event, Dem_EventStatusType EventStat
     return ret_val;
 }
 
-Std_ReturnType readEventDataFromNvm(event event, uint8_t *DTCStatus)
+static Std_ReturnType readEventDataFromNvm(event event, uint8_t *DTCStatus)
 {
     Std_ReturnType ret_val = E_NOK;
     LOGF(DL_DEBUG, "Requesting status: %s", event.EventName);
@@ -47,7 +47,7 @@ Std_ReturnType readEventDataFromNvm(event event, uint8_t *DTCStatus)
     return ret_val;
 }
 
-Std_ReturnType clearEventBlock(event event)
+static Std_ReturnType clearEventBlock(event event)
 {
     uint8_t emptyData[4] = {0};
     Std_ReturnType ret_val = E_NOK;

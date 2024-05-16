@@ -59,7 +59,7 @@ Std_ReturnType Dem_GetStatusOfDTC(uint8_t ClientId, uint8_t *DTCStatus);
  *
  * \param[in] ClientId - Unique client id, assigned to the instance of the calling module.
  * \retval E_OK: DTC successfully cleared
- *         E_NOT_OK: No DTC selecte
+ *         E_NOT_OK: No DTC selected
  *************************************************************************************************/
 Std_ReturnType Dem_ClearDTC(uint8_t ClientId);
 
@@ -74,7 +74,7 @@ Std_ReturnType Dem_ClearDTC(uint8_t ClientId);
  * \retval E_OK: Data wrote successfully by NvM.
  *         E_NOT_OK: An error occurred during writing the data.
  *************************************************************************************************/
-Std_ReturnType prepareEventDataForNvm(struct event event, Dem_EventStatusType EventStatus);
+static Std_ReturnType prepareEventDataForNvm(struct event event, Dem_EventStatusType EventStatus);
 
 /*!
  ************************************************************************************************
@@ -86,7 +86,7 @@ Std_ReturnType prepareEventDataForNvm(struct event event, Dem_EventStatusType Ev
  * \retval E_OK: Data read successfully from NvM.
  *         E_NOT_OK: An error occurred during reading the data.
  *************************************************************************************************/
-Std_ReturnType readEventDataFromNvm(struct event event, uint8_t *DTCStatus);
+static Std_ReturnType readEventDataFromNvm(struct event event, uint8_t *DTCStatus);
 
 
 /*!
@@ -98,6 +98,6 @@ Std_ReturnType readEventDataFromNvm(struct event event, uint8_t *DTCStatus);
  * \retval E_OK: Event block cleared by NvM.
  *         E_NOT_OK: An error occurred clearing block.
  *************************************************************************************************/
-Std_ReturnType clearEventBlock(struct event event);
+static Std_ReturnType clearEventBlock(struct event event);
 
 #endif // POC_CORE_INC_DEM_H_

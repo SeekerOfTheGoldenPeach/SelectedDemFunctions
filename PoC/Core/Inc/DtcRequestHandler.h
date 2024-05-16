@@ -15,8 +15,8 @@
 /*!
  ************************************************************************************************
  * \brief ClearAllDtc
- * \details 
- *  Call this function when the DTC must be cleared
+ * \details Clear all DTCs
+ * \retval void
  ************************************************************************************************
  * */
 void ClearAllDtc();
@@ -24,8 +24,8 @@ void ClearAllDtc();
 /*!
  ************************************************************************************************
  * \brief ReadAllDtc
- * \details 
- *  Call this function when the DTC must be read
+ * \details Get status of every DTC
+ * \retval void
  ************************************************************************************************
  * */
 void ReadAllDtc();

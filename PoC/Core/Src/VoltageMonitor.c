@@ -1,6 +1,7 @@
 #include "VoltageMonitor.h"
 #undef DLT_LOG_CONTEX
 #define DLT_LOG_CONTEX "vMon"
+
 void CheckVoltage()
 {
   const float SupplyVoltage = 3.0;
@@ -18,7 +19,7 @@ void CheckVoltage()
 
   LOGF(DL_DEBUG, "ReadADC: %d  |  Voltage: %s", adcResult, strVoltage);
 
-  if (voltage >= 2.5)
+  if (voltage >= OVER_VOLTAGE_THRESHOLD)
   {
     LOGF(DL_DEBUG, "OverVoltage detected!");
     if (Dem_SetEventStatus(OVER_VOLTAGE_ID, DEM_EVENT_STATUS_FAILED) != E_OK)
@@ -27,7 +28,7 @@ void CheckVoltage()
     }
     LOGF(DL_DEBUG, "Reporting OverVoltage succeed!");
   }
-  if (voltage <= 1.5)
+  if (voltage <= UNDER_VOLTAGE_THRESHOLD)
   {
     LOGF(DL_DEBUG, "UnderVoltage detected!");
     if (Dem_SetEventStatus(UNDER_VOLTAGE_ID, DEM_EVENT_STATUS_FAILED) != E_OK)
