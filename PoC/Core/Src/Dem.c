@@ -32,7 +32,7 @@ Std_ReturnType readEventDataFromNvm(event event, uint8_t *DTCStatus)
 {
     Std_ReturnType ret_val = E_NOK;
     LOGF(DL_DEBUG, "Requesting status: %s", event.EventName);
-    if (NvM_ReadBlock(event.blockId, DTCStatus) == E_OK)
+    if (DTCStatus != NULL && NvM_ReadBlock(event.blockId, DTCStatus) == E_OK)
     {
         LOGL(DL_INFO, "DEM: %s status: %x %x %x %x", event.EventName, DTCStatus[0], DTCStatus[1], DTCStatus[2], DTCStatus[3]);
         LOGF(DL_DEBUG, "Operation finished!");
