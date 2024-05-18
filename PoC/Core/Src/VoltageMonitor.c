@@ -15,7 +15,7 @@ void CheckVoltage()
   HAL_ADC_Start_DMA(&hadc1, &adcResult, 1);
   voltage = (SupplyVoltage * adcResult) / ADCResolution;
   voltage = roundf(10 * voltage) / 10;
-  gcvt(voltage, 6, strVoltage);
+  sprintf (strVoltage, "%d.%02u ", (int)voltage, (int) ((voltage- (int) voltage ) * 100) );
 
   LOGF(DL_DEBUG, "ReadADC: %d  |  Voltage: %s", adcResult, strVoltage);
 
