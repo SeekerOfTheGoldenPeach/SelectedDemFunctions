@@ -34,8 +34,8 @@ extern I2C_HandleTypeDef hi2c1;
 #define devAddr 0xA0
 #define AddressSize 1
 #define BLOCK_SIZE 4
-#define TRIALS 100
-#define PING_TIME_OUT 300
+#define TRIALS 50
+#define PING_TIME_OUT 20
 
 /*
  * Event Block IDs
