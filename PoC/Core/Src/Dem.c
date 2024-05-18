@@ -2,6 +2,10 @@
 #undef DLT_LOG_CONTEX
 #define DLT_LOG_CONTEX "DEM"
 
+static Std_ReturnType prepareEventDataForNvm(event event, Dem_EventStatusType EventStatus);
+static Std_ReturnType readEventDataFromNvm(event event, uint8_t *DTCStatus);
+static Std_ReturnType clearEventBlock(event event);
+
 static Std_ReturnType prepareEventDataForNvm(event event, Dem_EventStatusType EventStatus)
 {
     uint8_t data[4] = {0};
