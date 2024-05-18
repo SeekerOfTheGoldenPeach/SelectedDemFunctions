@@ -15,14 +15,16 @@ void CheckVoltage()
   HAL_ADC_Start_DMA(&hadc1, &adcResult, 1);
   voltage = (SupplyVoltage * adcResult) / ADCResolution;
   voltage = roundf(10 * voltage) / 10;
-  sprintf (strVoltage, "%d.%02u ", (int)voltage, (int) ((voltage- (int) voltage ) * 100) );
+  gcvt(voltage, 6, strVoltage);
+  //replacing gcvt crashes buttons operations
+  //sprintf (strVoltage, "%d.%01u", (int)voltage, (int) ((voltage- (int) voltage ) * 100) );
 
   LOGF(DL_DEBUG, "ReadADC: %d  |  Voltage: %s", adcResult, strVoltage);
 
   if (voltage >= OVER_VOLTAGE_THRESHOLD)
   {
     LOGF(DL_DEBUG, "OverVoltage detected!");
-    if (Dem_SetEventStatus(OVER_VOLTAGE_ID, DEM_EVENT_STATUS_FAILED) != E_OK)
+    if (Dem_SetEventStatus(overVoltage.clientId, DEM_EVENT_STATUS_FAILED) != E_OK)
     {
       LOGFF(DL_FATAL, "Reporting Event failed!");
     }
@@ -31,7 +33,7 @@ void CheckVoltage()
   if (voltage <= UNDER_VOLTAGE_THRESHOLD)
   {
     LOGF(DL_DEBUG, "UnderVoltage detected!");
-    if (Dem_SetEventStatus(UNDER_VOLTAGE_ID, DEM_EVENT_STATUS_FAILED) != E_OK)
+    if (Dem_SetEventStatus(underVoltage.clientId, DEM_EVENT_STATUS_FAILED) != E_OK)
     {
       LOGFF(DL_FATAL, "Reporting Event failed!");
     }

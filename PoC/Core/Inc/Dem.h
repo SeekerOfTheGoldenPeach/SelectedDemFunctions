@@ -21,12 +21,6 @@
 #include "NvM.h"
 #include "Events.h"
 
-/*
- * Events IDs
- */
-#define OVER_VOLTAGE_ID (0x00u)
-#define UNDER_VOLTAGE_ID (0x01u)
-
 /*!
  ************************************************************************************************
  * \brief Dem_SetEventStatus
