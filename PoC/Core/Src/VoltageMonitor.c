@@ -8,7 +8,7 @@ void CheckVoltage()
   const float ADCResolution = 4095.0;
   uint32_t adcResult = 0;
   float voltage = 0;
-  char strVoltage[50];
+  char strVoltage[50] = "No Value";
 
   LOGF(DL_DEBUG, "Operation Started!");
 
