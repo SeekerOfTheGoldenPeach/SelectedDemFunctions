@@ -2,7 +2,7 @@
 #undef DLT_LOG_CONTEX
 #define DLT_LOG_CONTEX "DtcH"
 
-uint8_t dtcStatus[4] = {0};
+static uint8_t dtcStatus[4] = {0};
 
 void ClearAllDtc()
 {
